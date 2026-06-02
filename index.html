@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Broadcast Manual Dashboard</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/7d58f9f2e5.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="background-glow glow1"></div>
+  <div class="background-glow glow2"></div>
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      <i class="fa-solid fa-bullhorn"></i>
+      <h2>Broadcast</h2>
+    </div>
+	
+</div>
+
+    <ul class="menu">
+    <ul class="menu">
+
+  <li class="active" data-page="dashboardPage">
+    <i class="fa-solid fa-chart-line"></i>
+    Dashboard
+  </li>
+
+  <li data-page="broadcastPage">
+    <i class="fa-solid fa-paper-plane"></i>
+    Broadcast
+  </li>
+
+  <li data-page="contactPage">
+    <i class="fa-solid fa-users"></i>
+    Contacts
+  </li>
+
+  <li data-page="campaignPage">
+    <i class="fa-solid fa-chart-pie"></i>
+    Campaign
+  </li>
+
+  <li data-page="settingsPage">
+    <i class="fa-solid fa-gear"></i>
+    Settings
+  </li>
+
+</ul>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main-content">
+
+  <!-- DASHBOARD -->
+
+  <section id="dashboardPage" class="page active-page">
+
+    <div class="topbar">
+
+      <div>
+        <h1>Broadcast Manual Dashboard</h1>
+        <p>Kelola data broadcast dengan tampilan modern neon ✨</p>
+      </div>
+
+      <button class="add-btn" id="openModal">
+        <i class="fa-solid fa-plus"></i>
+        Tambah Broadcast
+      </button>
+
+    </div>
+
+    <div class="stats-grid">
+
+      <div class="card neon-hover">
+        <div>
+          <h3>Total Broadcast</h3>
+          <span id="totalBroadcast">0</span>
+        </div>
+      </div>
+
+      <div class="card neon-hover">
+        <div>
+          <h3>Terkirim</h3>
+          <span id="sentCount">0</span>
+        </div>
+      </div>
+
+      <div class="card neon-hover">
+        <div>
+          <h3>Pending</h3>
+          <span id="pendingCount">0</span>
+        </div>
+      </div>
+
+      <div class="card neon-hover">
+        <div>
+          <h3>Campaign</h3>
+          <span id="campaignCount">0</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- BROADCAST -->
+
+  <section id="broadcastPage" class="page">
+
+    <div class="table-box neon-hover">
+
+      <div class="table-header">
+
+        <h2>List Broadcast Manual</h2>
+
+        <input
+          type="text"
+          placeholder="Cari broadcast..."
+          id="searchInput"
+        >
+
+      </div>
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Broadcast</th>
+            <th>Kontak</th>
+            <th>Campaign</th>
+            <th>Status</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+
+        <tbody id="broadcastTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="contactPage" class="page">
+
+    <div class="card neon-hover big-card">
+      <h1>Contacts</h1>
+      <p>Total kontak tersimpan untuk broadcast manual.</p>
+
+      <div class="contact-list">
+        <div class="contact-item">
+          <h3>Mahasiswa TI</h3>
+          <span>120 Kontak</span>
+        </div>
+
+        <div class="contact-item">
+          <h3>Pelanggan Toko</h3>
+          <span>85 Kontak</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CAMPAIGN -->
+
+  <section id="campaignPage" class="page">
+
+    <div class="card neon-hover big-card">
+      <h1>Campaign</h1>
+
+      <div class="campaign-box">
+        <div class="campaign-item">
+          <h3>Campaign Lebaran</h3>
+          <p>Status Aktif</p>
+        </div>
+
+        <div class="campaign-item">
+          <h3>Promo Mahasiswa</h3>
+          <p>Status Pending</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SETTINGS -->
+
+  <section id="settingsPage" class="page">
+
+    <div class="card neon-hover big-card">
+      <h1>Settings</h1>
+
+      <div class="setting-item">
+        <label>Dark Mode</label>
+        <input type="checkbox" checked>
+      </div>
+
+      <div class="setting-item">
+        <label>Notifikasi Broadcast</label>
+        <input type="checkbox" checked>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+  <!-- MODAL -->
+
+  <div class="modal" id="modal">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2>Tambah Broadcast</h2>
+
+        <button id="closeModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="broadcastForm">
+
+        <div class="input-group">
+          <label>Nama Broadcast</label>
+          <input type="text" id="name" required>
+        </div>
+
+        <div class="input-group">
+          <label>Jumlah Kontak</label>
+          <input type="number" id="contact" required>
+        </div>
+
+        <div class="input-group">
+          <label>Campaign</label>
+          <input type="text" id="campaign" required>
+        </div>
+
+        <div class="input-group">
+          <label>Status</label>
+
+          <select id="status">
+            <option value="Terkirim">Terkirim</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+
+        <button class="save-btn" type="submit">
+          Simpan Broadcast
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
