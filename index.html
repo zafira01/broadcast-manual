@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Broadcast Manual Dashboard Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- ========== LOADER ========== -->
+<div id="loader">
+  <div class="loader-inner">
+    <i class="fa-solid fa-bullhorn loader-icon"></i>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+    <p>Memuat Dashboard...</p>
+  </div>
+</div>
+
+<!-- ========== SIDEBAR ========== -->
+<aside class="sidebar" id="sidebar">
+  <div class="logo">
+    <div class="logo-icon"><i class="fa-solid fa-bullhorn"></i></div>
+    <div class="logo-text">
+      <span class="logo-title">Broadcast</span>
+      <span class="logo-sub">Pro Dashboard</span>
+    </div>
+  </div>
+
+  <div class="sidebar-section-label">MENU UTAMA</div>
+  <ul class="nav-list">
+    <li class="nav-item active" data-page="dashboard">
+      <i class="fa-solid fa-chart-pie"></i>
+      <span>Dashboard</span>
+      <div class="nav-indicator"></div>
+    </li>
+    <li class="nav-item" data-page="broadcast">
+      <i class="fa-solid fa-tower-broadcast"></i>
+      <span>Broadcast</span>
+      <div class="nav-indicator"></div>
+    </li>
+    <li class="nav-item" data-page="campaign">
+      <i class="fa-solid fa-bullseye"></i>
+      <span>Campaign</span>
+      <div class="nav-indicator"></div>
+    </li>
+    <li class="nav-item" data-page="contacts">
+      <i class="fa-solid fa-address-book"></i>
+      <span>Contacts</span>
+      <div class="nav-indicator"></div>
+    </li>
+    <li class="nav-item" data-page="messages">
+      <i class="fa-solid fa-envelope"></i>
+      <span>Messages</span>
+      <div class="nav-indicator"></div>
+    </li>
+  </ul>
+
+  <div class="sidebar-section-label">SISTEM</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-page="logs">
+      <i class="fa-solid fa-file-lines"></i>
+      <span>Logs</span>
+      <div class="nav-indicator"></div>
+    </li>
+    <li class="nav-item" data-page="admin">
+      <i class="fa-solid fa-user-shield"></i>
+      <span>Admin</span>
+      <div class="nav-indicator"></div>
+    </li>
+  </ul>
+
+  <div class="sidebar-footer">
+    <div class="sync-status" id="syncStatus">
+      <span class="sync-dot"></span>
+      <span class="sync-text">Terhubung ke Sheets</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ========== OVERLAY (mobile) ========== -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main class="main" id="main">
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="breadcrumb">
+        <span id="pageTitle">Dashboard</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrap">
+        <i class="fa-solid fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Cari data..." />
+      </div>
+      <button class="icon-btn" id="refreshBtn" title="Refresh dari Google Sheets">
+        <i class="fa-solid fa-rotate"></i>
+      </button>
+      <div class="avatar">A</div>
+    </div>
+  </header>
+
+  <!-- ===== DASHBOARD PAGE ===== -->
+  <section id="dashboardPage" class="page active-page">
+    <div class="page-inner">
+
+      <div class="stat-cards">
+        <div class="stat-card" data-color="purple">
+          <div class="stat-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+          <div class="stat-info">
+            <p>Total Broadcast</p>
+            <h2 id="totalBroadcast">—</h2>
+          </div>
+          <div class="stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i></div>
+        </div>
+        <div class="stat-card" data-color="blue">
+          <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="stat-info">
+            <p>Total Contacts</p>
+            <h2 id="totalContacts">—</h2>
+          </div>
+          <div class="stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i></div>
+        </div>
+        <div class="stat-card" data-color="teal">
+          <div class="stat-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <div class="stat-info">
+            <p>Total Campaign</p>
+            <h2 id="totalCampaigns">—</h2>
+          </div>
+          <div class="stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i></div>
+        </div>
+        <div class="stat-card" data-color="pink">
+          <div class="stat-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="stat-info">
+            <p>Total Messages</p>
+            <h2 id="totalMessages">—</h2>
+          </div>
+          <div class="stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i></div>
+        </div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-card wide">
+          <div class="chart-header">
+            <h3>Statistik Broadcast Bulanan</h3>
+            <select id="chartYear" class="select-sm">
+              <option>2025</option>
+              <option selected>2024</option>
+            </select>
+          </div>
+          <canvas id="broadcastChart" height="100"></canvas>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><h3>Status Campaign</h3></div>
+          <canvas id="campaignChart" height="180"></canvas>
+          <div id="donutLegend" class="donut-legend"></div>
+        </div>
+      </div>
+
+      <div class="recent-card">
+        <div class="recent-header">
+          <h3>Broadcast Terbaru</h3>
+          <button class="link-btn" data-page="broadcast">Lihat Semua <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <table class="recent-table">
+          <thead>
+            <tr><th>Judul</th><th>Penerima</th><th>Status</th><th>Tanggal</th></tr>
+          </thead>
+          <tbody id="recentBroadcast">
+            <tr><td colspan="4" class="empty-row">Memuat data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== DATA PAGE (Broadcast / Campaign / Contacts / Messages / Logs / Admin) ===== -->
+  <section id="dataPage" class="page">
+    <div class="page-inner">
+      <div class="data-toolbar">
+        <h2 id="tableTitle">Data</h2>
+        <div class="toolbar-actions">
+          <button class="btn-outline" id="exportBtn"><i class="fa-solid fa-download"></i> Export CSV</button>
+          <button class="btn-primary" id="addBtn"><i class="fa-solid fa-plus"></i> Tambah</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="dataTable">
+          <thead id="tableHead"></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+        <div id="emptyState" class="empty-state" style="display:none">
+          <i class="fa-solid fa-inbox"></i>
+          <p>Belum ada data</p>
+          <button class="btn-primary" id="addBtnEmpty"><i class="fa-solid fa-plus"></i> Tambah Data</button>
+        </div>
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========== FAB ========== -->
+<button class="fab" id="fab" title="Tambah Data">
+  <i class="fa-solid fa-plus"></i>
+</button>
+
+<!-- ========== MODAL ========== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 id="modalTitle">Tambah Data</h2>
+      <button class="modal-close" id="closeModal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="dynamicForm" novalidate>
+      <div id="formFields"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn-outline" id="cancelModal">Batal</button>
+        <button type="submit" class="btn-primary">
+          <i class="fa-solid fa-floppy-disk"></i> Simpan
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ========== TOAST ========== -->
+<div id="toast" class="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toastMsg">Berhasil disimpan</span>
+</div>
+
+<script src="config.js"></script>
+<script src="api.js"></script>
+<script src="ui.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
