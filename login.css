@@ -1,0 +1,199 @@
+/* ============================================================
+   login.css  –  Halaman Login Broadcast Pro
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-base:    #0d0f1a;
+  --bg-card:    #1a1e35;
+  --border:     rgba(255,255,255,0.08);
+  --purple:     #8b5cf6;
+  --purple2:    #a78bfa;
+  --blue:       #38bdf8;
+  --red:        #f87171;
+  --text-primary:   #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted:     #475569;
+  --radius: 16px;
+  --transition: 0.22s cubic-bezier(.4,0,.2,1);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── BACKGROUND BLOBS ───────────────────────────────────────── */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .18;
+  pointer-events: none;
+  animation: blobFloat 8s ease-in-out infinite alternate;
+}
+.blob-1 {
+  width: 480px; height: 480px;
+  background: var(--purple);
+  top: -120px; left: -100px;
+  animation-delay: 0s;
+}
+.blob-2 {
+  width: 360px; height: 360px;
+  background: var(--blue);
+  bottom: -80px; right: -80px;
+  animation-delay: 2s;
+}
+.blob-3 {
+  width: 260px; height: 260px;
+  background: #f472b6;
+  top: 50%; left: 55%;
+  animation-delay: 4s;
+}
+@keyframes blobFloat {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+/* ── CARD ───────────────────────────────────────────────────── */
+.login-wrap {
+  position: relative; z-index: 10;
+  width: 100%; padding: 1rem;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.login-card {
+  background: rgba(26, 30, 53, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem 2.25rem;
+  width: 100%; max-width: 420px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  animation: cardIn .45s cubic-bezier(.4,0,.2,1);
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── LOGO ───────────────────────────────────────────────────── */
+.login-logo {
+  display: flex; align-items: center; gap: .9rem;
+  margin-bottom: 2rem;
+}
+.logo-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--purple), #6d28d9);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; color: #fff; flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(139,92,246,.5);
+}
+.login-logo h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem; font-weight: 700; color: var(--text-primary);
+}
+.login-logo p {
+  font-size: .72rem; color: var(--text-muted);
+  margin-top: .1rem;
+}
+
+/* ── HEADING ────────────────────────────────────────────────── */
+.login-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--text-primary); margin-bottom: .35rem;
+}
+.login-sub {
+  font-size: .85rem; color: var(--text-secondary);
+  margin-bottom: 1.75rem;
+}
+
+/* ── ALERT ──────────────────────────────────────────────────── */
+.alert {
+  display: flex; align-items: center; gap: .6rem;
+  background: rgba(248,113,113,.12);
+  border: 1px solid rgba(248,113,113,.3);
+  border-radius: 10px;
+  padding: .7rem .9rem;
+  font-size: .83rem; color: var(--red);
+  margin-bottom: 1.25rem;
+  animation: shake .35s ease;
+}
+@keyframes shake {
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  75%{transform:translateX(6px)}
+}
+
+/* ── FORM ───────────────────────────────────────────────────── */
+.field-group {
+  display: flex; flex-direction: column; gap: .4rem;
+  margin-bottom: 1.1rem;
+}
+.field-group label {
+  font-size: .8rem; font-weight: 500; color: var(--text-secondary);
+}
+.input-wrap {
+  position: relative; display: flex; align-items: center;
+}
+.input-wrap > i {
+  position: absolute; left: .85rem;
+  color: var(--text-muted); font-size: .85rem;
+  pointer-events: none;
+}
+.input-wrap input {
+  width: 100%; background: rgba(255,255,255,.05);
+  border: 1px solid var(--border);
+  border-radius: 10px; color: var(--text-primary);
+  padding: .7rem .85rem .7rem 2.5rem;
+  font-size: .9rem; font-family: inherit; outline: none;
+  transition: border-color var(--transition), background var(--transition);
+}
+.input-wrap input:focus {
+  border-color: var(--purple);
+  background: rgba(139,92,246,.07);
+}
+.input-wrap input::placeholder { color: var(--text-muted); }
+
+.toggle-pw {
+  position: absolute; right: .85rem;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted); font-size: .85rem;
+  transition: color var(--transition);
+}
+.toggle-pw:hover { color: var(--text-secondary); }
+
+/* ── LOGIN BUTTON ────────────────────────────────────────────── */
+.btn-login {
+  width: 100%; padding: .8rem;
+  background: linear-gradient(135deg, var(--purple), #6d28d9);
+  color: #fff; border: none; border-radius: 10px;
+  font-size: .95rem; font-weight: 600; font-family: inherit;
+  cursor: pointer; margin-top: .5rem;
+  display: flex; align-items: center; justify-content: center; gap: .5rem;
+  box-shadow: 0 4px 20px rgba(139,92,246,.45);
+  transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.btn-login:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(139,92,246,.6); }
+.btn-login:active { transform: translateY(0); }
+.btn-login:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+/* ── FOOTER ─────────────────────────────────────────────────── */
+.login-footer {
+  text-align: center; margin-top: 1.75rem;
+  font-size: .75rem; color: var(--text-muted);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .login-card { padding: 2rem 1.5rem; }
+}
