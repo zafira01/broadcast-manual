@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar – Broadcast Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-icon"><i class="fa-solid fa-bullhorn"></i></div>
+        <div>
+          <h1>Broadcast Pro</h1>
+          <p>Dashboard Management System</p>
+        </div>
+      </div>
+
+      <h2 class="login-title">Daftar Akun Baru 👋</h2>
+      <p class="login-sub">Isi data di bawah untuk membuat akun</p>
+
+      <div class="alert" id="alertBox" style="display:none">
+        <i class="fa-solid fa-circle-xmark"></i>
+        <span id="alertMsg">Error message</span>
+      </div>
+
+      <form id="registerForm" novalidate>
+        <div class="field-group">
+          <label for="nama">Nama Lengkap</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="nama" placeholder="Masukkan nama kamu" required />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="email">Email</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="email" placeholder="contoh@email.com" required />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="password" placeholder="Minimal 6 karakter" required />
+            <button type="button" class="toggle-pw" id="togglePw">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login" id="registerBtn">
+          <span id="btnText">Daftar</span>
+          <i class="fa-solid fa-spinner fa-spin" id="btnSpinner" style="display:none"></i>
+        </button>
+      </form>
+
+      <p class="login-footer">
+        Sudah punya akun? <a href="login.html" style="color: var(--purple2);">Login di sini</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="register.js"></script>
+</body>
+</html>
